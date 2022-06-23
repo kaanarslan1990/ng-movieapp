@@ -1,59 +1,21 @@
-<div class="card mb-3">
+
+<div class="card mb-3" *ngFor="let item of movies">
     <div class="row">
         <div class="col-sm-3">
-            <img src="assets/img/1.jpeg" class="img-fluid rounded-start" alt="">
+            <img src="assets/img/{{item.imageUrl}}" class="img-fluid rounded-start" alt="">
         </div>
         <div class="col-sm-9">
             <div class="card-body">
-                <h2 class="card-title">Film 1</h2>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, dignissimos!</p>
+                <h2 class="card-title">{{item.title.toUpperCase()}}</h2>
+                <p class="card-text">{{item.description}}</p>
                 <button class="btn btn-sm btn-outline-primary">Details</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="card mb-3">
-    <div class="row">
-        <div class="col-sm-3">
-            <img src="assets/img/2.jpeg" class="img-fluid rounded-start" alt="">
-        </div>
-        <div class="col-sm-9">
-            <div class="card-body">
-                <h2 class="card-title">Film 2</h2>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, dignissimos!</p>
-                <button class="btn btn-sm btn-outline-primary">Details</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- <app-movie *ngFor="let item of movies"></app-movie> -->
 
-<div class="card mb-3">
-    <div class="row">
-        <div class="col-sm-3">
-            <img src="assets/img/3.jpeg" class="img-fluid rounded-start" alt="">
-        </div>
-        <div class="col-sm-9">
-            <div class="card-body">
-                <h2 class="card-title">Film 3</h2>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, dignissimos!</p>
-                <button class="btn btn-sm btn-outline-primary">Details</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="card mb-3">
-    <div class="row">
-        <div class="col-sm-3">
-            <img src="assets/img/4.jpeg" class="img-fluid rounded-start" alt="">
-        </div>
-        <div class="col-sm-9">
-            <div class="card-body">
-                <h2 class="card-title">Film 4</h2>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, dignissimos!</p>
-                <button class="btn btn-sm btn-outline-primary">Details</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- <ul>
+    <li *ngFor="let item of movies">{{item}}</li>
+</ul> -->
