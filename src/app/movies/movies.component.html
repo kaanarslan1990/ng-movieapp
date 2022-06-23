@@ -1,21 +1,81 @@
+<div *ngIf="movies.length > 0; else no_movies">
+  <h1 class="bg-success">{{ title }}</h1>
 
-<div class="card mb-3" *ngFor="let item of movies">
-    <div class="row">
+  <div class="alert alert-warning" *ngIf="movies.length > 0">
+    {{ movies.length }} film on list.
+  </div>
+
+  <ng-template [ngTemplateOutlet]="movieList1"></ng-template>
+  <ng-template [ngTemplateOutlet]="movieList2"></ng-template>
+  <ng-template [ngTemplateOutlet]="movieList3" [ngTemplateOutletContext]="{movies: movieRepository.getMovies()}"></ng-template>
+
+ 
+</div>
+<ng-template class="alert alert-warning" #no_movies>
+  Film Not Found
+</ng-template>
+
+<ng-template #movieList1>
+    <div class="card mb-3" *ngFor="let item of movies">
+      <div class="row">
         <div class="col-sm-3">
-            <img src="assets/img/{{item.imageUrl}}" class="img-fluid rounded-start" alt="">
+          <img
+            src="assets/img/{{ item.imageUrl }}"
+            class="img-fluid rounded-start"
+            alt=""
+          />
         </div>
         <div class="col-sm-9">
-            <div class="card-body">
-                <h2 class="card-title">{{item.title.toUpperCase()}}</h2>
-                <p class="card-text">{{item.description}}</p>
-                <button class="btn btn-sm btn-outline-primary">Details</button>
-            </div>
+          <div class="card-body">
+            <h2 class="card-title">{{ item.title.toUpperCase() }}</h2>
+            <p class="card-text">{{ item.description }}</p>
+            <button class="btn btn-sm btn-outline-primary">Details</button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </ng-template>
 
-<!-- <app-movie *ngFor="let item of movies"></app-movie> -->
+  <ng-template #movieList2>
+    <div class="card mb-3" *ngFor="let item of movies">
+      <div class="row">
+        <div class="col-sm-2">
+          <img
+            src="assets/img/{{ item.imageUrl }}"
+            class="img-fluid rounded-start"
+            alt=""
+          />
+        </div>
+        <div class="col-sm-10">
+          <div class="card-body">
+            <h2 class="card-title">{{ item.title.toUpperCase() }}</h2>
+            <p class="card-text">{{ item.description }}</p>
+            <button class="btn btn-sm btn-outline-primary">Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</ng-template>
 
-<!-- <ul>
-    <li *ngFor="let item of movies">{{item}}</li>
-</ul> -->
+<ng-template #movieList3 let-popularFilms="movies">
+    <h2 class="bg-success">Popular Movies</h2>
+    <div class="card mb-3" *ngFor="let item of popularFilms">
+      <div class="row">
+        <div class="col-sm-6">
+          <img
+            src="assets/img/{{ item.imageUrl }}"
+            class="img-fluid rounded-start"
+            alt=""
+          />
+        </div>
+        <div class="col-sm-6">
+          <div class="card-body">
+            <h2 class="card-title">{{ item.title.toUpperCase() }}</h2>
+            <p class="card-text">{{ item.description }}</p>
+            <button class="btn btn-sm btn-outline-primary">Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
