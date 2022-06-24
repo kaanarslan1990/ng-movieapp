@@ -1,25 +1,30 @@
 <div *ngIf="movies.length > 0; else no_movies">
   <h1 class="bg-success">{{ title }}</h1>
 
+  <div class="mb-3">
+    <input type="text" class="form-control" [(ngModel)]="filterText" placeholder="Search..."><small *ngIf="filterText">Your search: {{ filterText }}</small>
+  </div>
+
   <div class="alert alert-warning" *ngIf="movies.length > 0">
     {{ movies.length }} film on list.
   </div>
 
+  <ng-template [ngTemplateOutlet]="movieList1"></ng-template>
   <ng-template
     [ngTemplateOutlet]="movieList2"
     [ngTemplateOutletContext]="{ movies: popularMovies}"
   ></ng-template>
 
-  <ng-template [ngTemplateOutlet]="movieList1"></ng-template>
 </div>
 <ng-template class="alert alert-warning" #no_movies>
   Film Not Found
 </ng-template>
 
 
+
 <ng-template #movieList1>
   <h3 class="bg-success">All Movies</h3>
-  <div class="card mb-3" *ngFor="let item of movies">
+  <div class="card mb-3" *ngFor="let item of movies | movieFilter: filterText">
     <div class="row">
       <div class="col-sm-3">
         <img
@@ -77,7 +82,7 @@
   </div>
 </ng-template>
 
-<h4>lower-upper--title pipe</h4>
+<!-- <h4>lower-upper--title pipe</h4>
 <p>{{'Samsung S20'}}</p>
 <p>{{'Samsung S20' | lowercase}}</p>
 <p>{{'Samsung S20' | uppercase}}</p>
@@ -116,4 +121,4 @@
 <p>{{0.235 | percent}}</p>
 <p>{{0.0235 | percent}}</p>
 <p>{{1.26 | percent: '2.2-4' }}</p>
-<p>{{3/4 | percent: '2.2-4' }}</p>
+<p>{{3/4 | percent: '2.2-4' }}</p> -->

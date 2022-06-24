@@ -15,6 +15,8 @@ export class MoviesComponent implements OnInit {
   movieRepository: MovieRepository;
   today = new Date();
 
+  filterText: string = "";
+
   constructor() {
     this.movieRepository = new MovieRepository();
     this.movies = this.movieRepository.getMovies();

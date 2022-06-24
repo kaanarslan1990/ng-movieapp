@@ -16,7 +16,7 @@ export class MovieRepository {
       {
         id: 2,
         title: 'film 2',
-        description: 'film 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit placeat molestias voluptas ratione, voluptatibus maxime dignissimos enim laudantium expedita! Nobis mollitia sed nulla quo quibusdam tempore eos, illo vero odit!',
+        description: 'film 2 acıklama Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit placeat molestias voluptas ratione, voluptatibus maxime dignissimos enim laudantium expedita! Nobis mollitia sed nulla quo quibusdam tempore eos, illo vero odit!',
         imageUrl: '2.jpeg',
         isPopular:true,
         datePublished: new Date(1990,10,10)
