@@ -2,11 +2,16 @@
   <h1 class="bg-success">{{ title }}</h1>
 
   <div class="mb-3">
-    <input type="text" class="form-control" [(ngModel)]="filterText" placeholder="Search..."><small *ngIf="filterText">Your search: {{ filterText }}</small>
+    <input type="text"     
+    class="form-control" 
+    [(ngModel)]="filterText" 
+    (ngModelChange)="onInputChange()"
+    placeholder="Search...">
+    <small *ngIf="filterText">Your search: {{ filterText }}</small>
   </div>
 
-  <div class="alert alert-warning" *ngIf="movies.length > 0">
-    {{ movies.length }} film on list.
+  <div class="alert alert-warning" *ngIf="FilteredMovies.length > 0">
+    {{ FilteredMovies.length }} film on list.
   </div>
 
   <ng-template [ngTemplateOutlet]="movieList1"></ng-template>
@@ -24,7 +29,7 @@
 
 <ng-template #movieList1>
   <h3 class="bg-success">All Movies</h3>
-  <div class="card mb-3" *ngFor="let item of movies | movieFilter: filterText">
+  <div class="card mb-3" *ngFor="let item of FilteredMovies">
     <div class="row">
       <div class="col-sm-3">
         <img
