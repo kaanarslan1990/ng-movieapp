@@ -11,11 +11,14 @@ export class MoviesComponent implements OnInit {
 
   title= "Film List";
   movies: Movie[];
+  popularMovies: Movie[];
   movieRepository: MovieRepository;
+  today = new Date();
 
   constructor() {
     this.movieRepository = new MovieRepository();
     this.movies = this.movieRepository.getMovies();
+    this.popularMovies = this.movieRepository.getPopularMovies();
    }
 
   ngOnInit(): void {

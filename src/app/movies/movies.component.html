@@ -5,77 +5,114 @@
     {{ movies.length }} film on list.
   </div>
 
-  <ng-template [ngTemplateOutlet]="movieList1"></ng-template>
-  <ng-template [ngTemplateOutlet]="movieList2"></ng-template>
-  <ng-template [ngTemplateOutlet]="movieList3" [ngTemplateOutletContext]="{movies: movieRepository.getMovies()}"></ng-template>
+  <ng-template
+    [ngTemplateOutlet]="movieList2"
+    [ngTemplateOutletContext]="{ movies: popularMovies}"
+  ></ng-template>
 
- 
+  <ng-template [ngTemplateOutlet]="movieList1"></ng-template>
 </div>
 <ng-template class="alert alert-warning" #no_movies>
   Film Not Found
 </ng-template>
 
 <ng-template #movieList1>
-    <div class="card mb-3" *ngFor="let item of movies">
-      <div class="row">
-        <div class="col-sm-3">
-          <img
-            src="assets/img/{{ item.imageUrl }}"
-            class="img-fluid rounded-start"
-            alt=""
-          />
-        </div>
-        <div class="col-sm-9">
-          <div class="card-body">
-            <h2 class="card-title">{{ item.title.toUpperCase() }}</h2>
-            <p class="card-text">{{ item.description }}</p>
-            <button class="btn btn-sm btn-outline-primary">Details</button>
-          </div>
+  <h3 class="bg-success">All Movies</h3>
+  <div class="card mb-3" *ngFor="let item of movies">
+    <div class="row">
+      <div class="col-sm-3">
+        <img
+          src="assets/img/{{ item.imageUrl }}"
+          class="img-fluid rounded-start"
+          alt=""
+        />
+      </div>
+      <div class="col-sm-9">
+        <div class="card-body">
+          <h2 class="card-title">{{ item.title | titlecase }}</h2>
+          <p class="card-text">{{ item.description }}</p>
+          <p class="card-text">{{ item.datePublished | date: 'dd/MM/y' }}</p>
+          <button class="btn btn-sm btn-outline-primary">Details</button>
         </div>
       </div>
     </div>
-  </ng-template>
+  </div>
+</ng-template>
 
-  <ng-template #movieList2>
-    <div class="card mb-3" *ngFor="let item of movies">
-      <div class="row">
-        <div class="col-sm-2">
-          <img
-            src="assets/img/{{ item.imageUrl }}"
-            class="img-fluid rounded-start"
-            alt=""
-          />
-        </div>
-        <div class="col-sm-10">
-          <div class="card-body">
-            <h2 class="card-title">{{ item.title.toUpperCase() }}</h2>
-            <p class="card-text">{{ item.description }}</p>
-            <button class="btn btn-sm btn-outline-primary">Details</button>
-          </div>
+<ng-template #movieList2 let-films="movies">
+  <h3 class="bg-success">Popular Movies</h3>
+  <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+    <div class="col" *ngFor="let item of films">
+      <div class="card h-100">
+        <img src="assets/img/{{ item.imageUrl }}" class="card-img-top h-100" />
+        <div class="card-body">
+          <h5 class="card-title">{{item.title}}</h5>
+          <p class="card-text">{{ item.description }}</p>
         </div>
       </div>
     </div>
+  </div>
 </ng-template>
 
 <ng-template #movieList3 let-popularFilms="movies">
-    <h2 class="bg-success">Popular Movies</h2>
-    <div class="card mb-3" *ngFor="let item of popularFilms">
-      <div class="row">
-        <div class="col-sm-6">
-          <img
-            src="assets/img/{{ item.imageUrl }}"
-            class="img-fluid rounded-start"
-            alt=""
-          />
-        </div>
-        <div class="col-sm-6">
-          <div class="card-body">
-            <h2 class="card-title">{{ item.title.toUpperCase() }}</h2>
-            <p class="card-text">{{ item.description }}</p>
-            <button class="btn btn-sm btn-outline-primary">Details</button>
-          </div>
+  <h2 class="bg-success">Popular Movies</h2>
+  <div class="card mb-3" *ngFor="let item of popularFilms">
+    <div class="row">
+      <div class="col-sm-6">
+        <img
+          src="assets/img/{{ item.imageUrl }}"
+          class="img-fluid rounded-start"
+          alt=""
+        />
+      </div>
+      <div class="col-sm-6">
+        <div class="card-body">
+          <h2 class="card-title">{{ item.title.toUpperCase() }}</h2>
+          <p class="card-text">{{ item.description }}</p>
+          <button class="btn btn-sm btn-outline-primary">Details</button>
         </div>
       </div>
     </div>
-  </ng-template>
+  </div>
+</ng-template>
 
+<h4>lower-upper--title pipe</h4>
+<p>{{'Samsung S20'}}</p>
+<p>{{'Samsung S20' | lowercase}}</p>
+<p>{{'Samsung S20' | uppercase}}</p>
+<p>{{'Samsung S20' | titlecase}}</p>
+
+<br><br>
+
+<h4>Date Pipe</h4>
+<p>{{today}}</p>
+<p>{{today | date}}</p>
+<p>{{today | date:'fullDate'}}</p>
+<p>{{today | date:'medium'}}</p>
+<p>{{today | date:'shortTime'}}</p>
+<p>{{today | date:'hh:mm:ss'}}</p>
+
+<br><br>
+
+<h4>Decimal Pipe</h4>
+
+<p>{{2.23456343 | number}}</p>
+<p>{{2.23456343 | number: '2.0-3'}}</p>
+<p>{{2.23456343 | number: '4.1-7'}}</p>
+
+<br><br>
+
+<h4>Currency Pipe</h4>
+
+<p>{{395 | currency}}</p>
+<p>{{395 | currency: 'EUR'}}</p>
+<p>{{395 | currency: 'TRY'}}</p>
+
+<br><br>
+
+<h4>Percent Pipe</h4>
+
+<p>{{0.235 | percent}}</p>
+<p>{{0.0235 | percent}}</p>
+<p>{{1.26 | percent: '2.2-4' }}</p>
+<p>{{3/4 | percent: '2.2-4' }}</p>
