@@ -1,3 +1,9 @@
+<div class="alert alert-danger" *ngIf="error">
+  {{error}}
+  <!-- 404 Not Found! -->
+</div>
+
+
 <div *ngIf="movies.length > 0; else no_movies">
   <h1 class="bg-success">{{ title }}</h1>
 
@@ -23,7 +29,9 @@
   ></ng-template> -->
 </div>
 <ng-template class="alert alert-warning" #no_movies>
+  <div class="alert alert-warning">
   Film Not Found
+</div>
 </ng-template>
 
 <ng-template #movieList1>

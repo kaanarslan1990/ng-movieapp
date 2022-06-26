@@ -17,6 +17,7 @@ export class MoviesComponent implements OnInit {
   today = new Date();
 
   filterText: string = '';
+  error: any;
 
   constructor(
     private alertify: AlertifyService,
@@ -27,7 +28,7 @@ export class MoviesComponent implements OnInit {
     this.movieService.getMovies().subscribe((data) => {
       this.movies = data;
       this.FilteredMovies = this.movies;
-    });
+    }, error => this.error= error);
   }
 
   onInputChange() {
