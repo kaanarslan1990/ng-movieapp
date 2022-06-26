@@ -51,7 +51,7 @@
           <p class="card-text">{{ item.description | summary: 50 }}</p>
           <!-- <p class="card-text">{{ item.datePublished | date: 'dd/MM/y' }}</p> -->
           <div>
-            <button class="btn btn-sm btn-outline-primary">Details</button>
+            <a routerLink="/movies/{{ item.id }}" class="btn btn-sm btn-outline-primary">Details</a>
             <button
               (click)="addToList($event, item)"
               class="btn btn-sm btn-primary ms-1"
