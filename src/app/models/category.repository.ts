@@ -1,4 +1,4 @@
-import { Category } from "./categoriy";
+import { Category } from "./category";
 
 export class CategoryRepository {
     private categories: Category[];
