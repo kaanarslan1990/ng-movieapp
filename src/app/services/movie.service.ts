@@ -6,7 +6,7 @@ import { Movie } from '../models/movie';
 
 @Injectable()
 export class MovieService {
-  url = 'http://localhost:3000/movie';
+  url = 'http://localhost:3000/movies';
 
   constructor(private http: HttpClient) {}
 
