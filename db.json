@@ -31,6 +31,12 @@
             "title": "film 5",
             "description": "film 5 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit placeat molestias voluptas ratione, voluptatibus maxime dignissimos enim laudantium expedita! Nobis mollitia sed nulla quo quibusdam tempore eos, illo vero odit!",
             "imageUrl": "5.jpeg"
+          },
+        {
+            "id": 6,
+            "title": "film 6",
+            "description": "film 6 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit placeat molestias voluptas ratione, voluptatibus maxime dignissimos enim laudantium expedita! Nobis mollitia sed nulla quo quibusdam tempore eos, illo vero odit!",
+            "imageUrl": "1.jpeg"
           }
           
     ],
@@ -41,5 +47,6 @@
         {"id":3, "title": "comedy"},
         {"id":4, "title": "science"},
         {"id":5, "title": "action"}
+        
     ]
 }
