@@ -41,8 +41,16 @@
       "description": "film 6 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit placeat molestias voluptas ratione, voluptatibus maxime dignissimos enim laudantium expedita! Nobis mollitia sed nulla quo quibusdam tempore eos, illo vero odit!",
       "imageUrl": "1.jpeg",
       "categoryId": 2
+    },
+    {
+      "id": 7,
+      "title": "deneme urkl",
+      "description": "merhaba dünya nasılsısn",
+      "imageUrl": "1.jpeg",
+      "isPopular": false,
+      "datePublished": 1656323399307,
+      "categoryId": "1"
     }
-    
   ],
   "categories": [
     {
