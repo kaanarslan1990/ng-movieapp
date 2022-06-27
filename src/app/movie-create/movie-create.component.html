@@ -14,8 +14,8 @@
       class="alert alert-danger"
       *ngIf="movieForm.get('title').invalid && movieForm.get('title').touched"
     >
-      <p *ngIf="title.errors['required']">Required Field</p>
-      <p *ngIf="title.errors['minlength']">Min 5 characters</p>
+      <p *ngIf="movieForm.get('title').errors['required']">Required Field</p>
+      <p *ngIf="movieForm.get('title').errors['minlength']">Min 5 characters</p>
     </div>
   </div>
 
@@ -36,6 +36,13 @@
       formControlName="imageUrl"
       name="imageUrl"
     />
+    <div
+      class="alert alert-danger"
+      *ngIf="imageUrl.invalid && imageUrl.touched"
+    >
+      <p *ngIf="imageUrl.errors['required']">Required Field</p>
+      <p *ngIf="imageUrl.errors['wrongExtension']">Wrong Extension</p>
+    </div>
   </div>
 
   <div class="mb-3">
@@ -48,6 +55,6 @@
     </select>
   </div>
 
-  <button type="submit" class="btn btn-primary">Create Movie</button>
+  <button [disabled]="!movieForm.valid" type="submit" class="btn btn-primary">Create Movie</button>
   <button class="btn btn-warning ms-1" (click)="clearForm()">Clear</button>
 </form>
