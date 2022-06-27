@@ -1,29 +1,73 @@
 <h1>Create Movie</h1>
 
-<form #form="ngForm" (ngSubmit)="createMovie(form)">
-    <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
-        <input required minlength="5" #title="ngModel" (change)="log(title)" type="text" [(ngModel)]="model.title" name="title" class="form-control" placeholder="">
-    </div>
-    
-    <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <textarea class="form-control" [(ngModel)]="model.description" name="description"></textarea>
-    </div>
+<form #form="ngForm" (ngSubmit)="createMovie()">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input
+      required
+      minlength="5"
+      #title="ngModel"
+      (change)="log(title)"
+      type="text"
+      [(ngModel)]="model.title"
+      name="title"
+      #imgUrl="ngModel"
+      class="form-control"
 
-    <div class="mb-3">
-        <label for="imageUrl" class="form-label">Image URL</label>
-        <input type="text" class="form-control" [(ngModel)]="model.imageUrl" name="imgUrl" placeholder="">
+    />
+    <div class="alert alert-danger" *ngIf="title.invalid && title.touched">
+      <p *ngIf="title.errors['required']">Required Field</p>
+      <p *ngIf="title.errors['minlength']">Required Field</p>
     </div>
+  </div>
 
-    <div class="mb-3">
-        <label for="categoryId" class="form-label">Category</label>
-        <select [(ngModel)]="model.categoryId" class="form-select" name="categoryId">
-            <option value="-1">Select</option>
-            <option *ngFor="let item of categories" [value]="item.id">{{item.name | titlecase}}</option>
-        </select>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      required
+      class="form-control"
+      [(ngModel)]="model.description"
+      name="description"
+      #description="ngModel"
+    ></textarea>
+    <div class="alert alert-danger" *ngIf="description.invalid && description.touched">
+      Required Field
     </div>
+  </div>
 
-    <button type="submit" class="btn btn-primary" >Create Movie</button>
+  <div class="mb-3">
+    <label for="imageUrl" class="form-label">Image URL</label>
+    <input
+      required
+      type="text"
+      class="form-control"
+      [(ngModel)]="model.imageUrl"
+      name="imageUrl"
+      #imageUrl="ngModel"
+      placeholder=""
+    />
+    <div class="alert alert-danger" *ngIf="imageUrl.invalid && imageUrl.touched">
+      Required Field
+    </div>
+  </div>
 
+  <div class="mb-3">
+    <label for="categoryId" class="form-label">Category</label>
+    <select
+      [(ngModel)]="model.categoryId"
+      class="form-select"
+      name="categoryId"
+      #categoryId="ngModel"
+    >
+      <option value="-1">Select</option>
+      <option *ngFor="let item of categories" [value]="item.id">
+        {{ item.name | titlecase }}
+      </option>
+    </select>
+    <div class="alert alert-danger" *ngIf="categoryId.invalid && categoryId.touched">
+      Required Field
+    </div>
+  </div>
+
+  <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Create Movie</button>
 </form>

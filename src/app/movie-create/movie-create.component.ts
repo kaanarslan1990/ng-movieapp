@@ -14,7 +14,9 @@ import { MovieService } from '../services/movie.service';
 })
 export class MovieCreateComponent implements OnInit {
   categories: Category[];
-  model: any = {};
+  model: any = {
+    categoryId: '-1',
+  };
 
   constructor(
     private categoryService: CategoryService,
@@ -29,35 +31,25 @@ export class MovieCreateComponent implements OnInit {
     });
   }
 
-  createMovie(form: NgForm) {
-    console.log(this.model);
-    console.log(form)  
-    
-    
+  createMovie() {
+    const movie = {
+      id: 0,
+      title: this.model.title,
+      description: this.model.description,
+      imageUrl: this.model.imageUrl,
+      isPopular: false,
+      datePublished: new Date().getTime(),
+      categoryId: this.model.categoryId,
+    };
 
-
-    // const movie = {
-    //   id: 0,
-    //   title: title.value,
-    //   description: description.value,
-    //   imageUrl: imageUrl.value,
-    //   isPopular: false,
-    //   datePublished: new Date().getTime(),
-    //   categoryId: categoryId.value,
-    // };
-
-    // this.movieService.createMovie(movie).subscribe((data) => {
-    //   this.router.navigate(['/movies', data.id]);
-    // });
+    this.movieService.createMovie(movie).subscribe((data) => {
+      this.router.navigate(['/movies', data.id]);
+    });
   }
   log(value: any) {
-    console.log(value)
+    console.log(value);
   }
 }
-
-
-
-
 
 // title: any, description: any, imageUrl: any, categoryId: any
 // if (title.value === '' || description.value === '' || imageUrl === "" || categoryId.value === "-1") {

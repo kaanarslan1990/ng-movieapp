@@ -44,11 +44,26 @@
     },
     {
       "id": 7,
-      "title": "deneme urkl",
-      "description": "merhaba dünya nasılsısn",
+      "title": "denem1",
+      "description": "sdjahsjdbfvj asdkjf",
+      "imageUrl": "3.jpeg",
+      "isPopular": false,
+      "datePublished": 1656329374896,
+      "categoryId": "1"
+    },
+    {
+      "id": 8,
+      "isPopular": false,
+      "datePublished": 1656329585927,
+      "categoryId": "-1"
+    },
+    {
+      "id": 9,
+      "title": "baslık1",
+      "description": "denememememem",
       "imageUrl": "1.jpeg",
       "isPopular": false,
-      "datePublished": 1656323399307,
+      "datePublished": 1656329670091,
       "categoryId": "1"
     }
   ],
