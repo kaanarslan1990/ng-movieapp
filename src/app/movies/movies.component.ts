@@ -8,58 +8,67 @@ import { MovieService } from '../services/movie.service';
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css'],
-  providers: [MovieService]
+  providers: [MovieService],
 })
 export class MoviesComponent implements OnInit {
-
-  title = "Film Listesi";
+  title = 'Film Listesi';
   movies: Movie[] = [];
   FilteredMovies: Movie[] = [];
 
-  filterText: string = "";
+  filterText: string = '';
   error: any;
 
-  loading: boolean= false;
+  loading: boolean = false;
 
   constructor(
     private alertify: AlertifyService,
     private movieService: MovieService,
-    private activatedRoute: ActivatedRoute) {
-  }
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-
+    this.activatedRoute.params.subscribe((params) => {
       this.loading = true;
 
-      this.movieService.getMovies(params["categoryId"]).subscribe(data => {
-        this.movies = data;
-        this.FilteredMovies = this.movies;
-        this.loading= false;
-      }, error => {
-        this.error = error;
-        this.loading= false;
-      });
+      this.movieService.getMovies(params['categoryId']).subscribe(
+        (data) => {
+          this.movies = data;
+          this.FilteredMovies = this.movies;
+          this.loading = false;
+        },
+        (error) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
     });
-
   }
+  
 
   // ngOnInit(): void {
-  //   this.activatedRoute.params.subscribe(params => {
+  //   this.activatedRoute.params.subscribe((params) => {
+  //     this.movieService.getMovies(params['categoryId']).subscribe({
+  //       next: (data) => {
+  //         this.FilteredMovies = this.movies;
+  //         this.movies = data;
+  //       },
 
-  //     this.movieService.getMovies(params["categoryId"]).subscribe({
-  //       complete: () => this.movies = data,
-  //       error: (e) => this.error = error,    
-  //       next: () => this.FilteredMovies = this.movies,    
-  //   });
-  //   });
-
-  // }
+  //       error: (error: any) => {
+  //         this.error = error;
+  //         this.loading = false;
+  //       },
+        
+  //   })
+  // },}
 
   onInputChange() {
-    this.FilteredMovies = this.filterText?
-      this.movies.filter(m=> m.title.indexOf(this.filterText) !== -1 ||
-                         m.description.indexOf(this.filterText) !== -1): this.movies
+    this.FilteredMovies = this.filterText
+      ? this.movies.filter(
+          (m) =>
+            m.title.indexOf(this.filterText) !== -1 ||
+            m.description.indexOf(this.filterText) !== -1
+        )
+      : this.movies;
   }
   addToList($event: any, movie: Movie) {
     if ($event.target.classList.contains('btn-primary')) {

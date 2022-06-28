@@ -15,7 +15,9 @@ export class CategoryCreateComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   createCategory(name: string) {
     const category: Category = {
