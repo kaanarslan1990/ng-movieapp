@@ -1,4 +1,5 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -14,6 +15,7 @@ export class AuthComponent implements OnInit {
 
   isLoginMode: boolean = true;
   loading: boolean = false;
+  error: string;
 
   constructor(private authService: AuthService) { }
 
@@ -43,10 +45,11 @@ export class AuthComponent implements OnInit {
       console.log(response);
       this.loading = false;
     }, err => {
+      this.error = err;      
       console.log(err);
       this.loading = false;
     })
-
+    
     form.reset();
 
     
