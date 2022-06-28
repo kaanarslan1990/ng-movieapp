@@ -8,49 +8,53 @@ import { MovieService } from '../services/movie.service';
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css'],
-  providers: [MovieService],
+  providers: [MovieService]
 })
 export class MoviesComponent implements OnInit {
-  title = 'Film List';
+
+  title = "Film Listesi";
   movies: Movie[] = [];
   FilteredMovies: Movie[] = [];
-  popularMovies: Movie[] = [];
-  today = new Date();
 
-  filterText: string = '';
+  filterText: string = "";
   error: any;
 
   constructor(
     private alertify: AlertifyService,
     private movieService: MovieService,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      this.movieService.getMovies(params['categoryId']).subscribe(
-        (data) => {
-          this.movies = data;
-          this.FilteredMovies = this.movies;
-        },
-        (error) => {
-          this.error = error;
-          console.log(this.error);
-        }
-      );
+    this.activatedRoute.params.subscribe(params => {
+
+      this.movieService.getMovies(params["categoryId"]).subscribe(data => {
+        this.movies = data;
+        this.FilteredMovies = this.movies;
+      }, error => {
+        this.error = error;
+      });
     });
+
   }
+
+  // ngOnInit(): void {
+  //   this.activatedRoute.params.subscribe(params => {
+
+  //     this.movieService.getMovies(params["categoryId"]).subscribe({
+  //       complete: () => this.movies = data,
+  //       error: (e) => this.error = error,    
+  //       next: () => this.FilteredMovies = this.movies,    
+  //   });
+  //   });
+
+  // }
 
   onInputChange() {
-    this.FilteredMovies = this.filterText
-      ? this.movies.filter(
-          (m) =>
-            m.title.indexOf(this.filterText) !== -1 ||
-            m.description.indexOf(this.filterText) !== -1
-        )
-      : this.movies;
+    this.FilteredMovies = this.filterText?
+      this.movies.filter(m=> m.title.indexOf(this.filterText) !== -1 ||
+                         m.description.indexOf(this.filterText) !== -1): this.movies
   }
-
   addToList($event: any, movie: Movie) {
     if ($event.target.classList.contains('btn-primary')) {
       $event.target.innerText = 'Remove from List';
