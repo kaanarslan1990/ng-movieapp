@@ -3,8 +3,8 @@
   <!-- 404 Not Found! -->
 </div>
 
-
-<div *ngIf="movies.length > 0; else no_movies">
+<div *ngIf="!loading">
+  <div *ngIf="movies.length > 0; else no_movies">
   <h1 class="bg-success">{{ title }}</h1>
 
   <div class="mb-3">
@@ -27,6 +27,7 @@
     [ngTemplateOutlet]="movieList2"
     [ngTemplateOutletContext]="{ movies: popularMovies }"
   ></ng-template> -->
+</div>
 </div>
 <ng-template class="alert alert-warning" #no_movies>
   <div class="alert alert-warning">
@@ -65,7 +66,11 @@
   </div>
 </ng-template>
 
-<ng-template #movieList2 let-films="movies">
+<div *ngIf="loading" class="spinner-border text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<!-- <ng-template #movieList2 let-films="movies">
   <h3 class="bg-success">Popular Movies</h3>
   <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
     <div class="col" *ngFor="let item of films">
@@ -100,45 +105,6 @@
       </div>
     </div>
   </div>
-</ng-template>
+</ng-template> -->
 
-<!-- <h4>lower-upper--title pipe</h4>
-<p>{{'Samsung S20'}}</p>
-<p>{{'Samsung S20' | lowercase}}</p>
-<p>{{'Samsung S20' | uppercase}}</p>
-<p>{{'Samsung S20' | titlecase}}</p>
 
-<br><br>
-
-<h4>Date Pipe</h4>
-<p>{{today}}</p>
-<p>{{today | date}}</p>
-<p>{{today | date:'fullDate'}}</p>
-<p>{{today | date:'medium'}}</p>
-<p>{{today | date:'shortTime'}}</p>
-<p>{{today | date:'hh:mm:ss'}}</p>
-
-<br><br>
-
-<h4>Decimal Pipe</h4>
-
-<p>{{2.23456343 | number}}</p>
-<p>{{2.23456343 | number: '2.0-3'}}</p>
-<p>{{2.23456343 | number: '4.1-7'}}</p>
-
-<br><br>
-
-<h4>Currency Pipe</h4>
-
-<p>{{395 | currency}}</p>
-<p>{{395 | currency: 'EUR'}}</p>
-<p>{{395 | currency: 'TRY'}}</p>
-
-<br><br>
-
-<h4>Percent Pipe</h4>
-
-<p>{{0.235 | percent}}</p>
-<p>{{0.0235 | percent}}</p>
-<p>{{1.26 | percent: '2.2-4' }}</p>
-<p>{{3/4 | percent: '2.2-4' }}</p> -->
