@@ -1,4 +1,4 @@
-<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+<form *ngIf="!loading" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="email" required email ngModel name="email" id="email" class="form-control" placeholder="">
@@ -11,3 +11,7 @@
     <button type="submit" class="btn btn-primary" [disabled]="authForm.invalid">{{isLoginMode ? 'Login' : 'Register'}}</button>
     <button type="button" class="btn btn-danger ms-2" (click)="onToggleMode()">Toggle to {{isLoginMode ? 'Register' : 'Login'}}</button>
 </form>
+
+<div *ngIf="loading" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>

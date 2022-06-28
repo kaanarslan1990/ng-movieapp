@@ -1,17 +1,21 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { AuthResponse } from '../models/AuthResponse';
 import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css'],
+  styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  isLoginMode: boolean = true;
 
-  constructor(private authService: AuthService) {}
+  isLoginMode: boolean = true;
+  loading: boolean = false;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {}
 
@@ -20,22 +24,32 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if (form.invalid) return;
+    if(form.invalid)
+      return;
 
     const email = form.value.email;
     const password = form.value.password;
+    this.loading = true;
 
-    if (this.isLoginMode) {
-      console.log('Login mode');
+    let authResponse: Observable<AuthResponse>;
+
+    if(this.isLoginMode) {
+      authResponse = this.authService.login(email, password)
     } else {
-      this.authService.signUp(email, password).subscribe(
-        (response) => {
-          console.log(response);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+      authResponse = this.authService.signUp(email, password)
     }
+
+    authResponse.subscribe(response => {
+      console.log(response);
+      this.loading = false;
+    }, err => {
+      console.log(err);
+      this.loading = false;
+    })
+
+    form.reset();
+
+    
   }
+
 }
