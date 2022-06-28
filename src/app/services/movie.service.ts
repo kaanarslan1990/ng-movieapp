@@ -28,12 +28,12 @@ export class MovieService {
         const movies: Movie[] = [];        
 
         for (const key in response) {
-          if (categoryId) {
-            if (categoryId === response[key].categoryId) {
-              movies.push({ ...response[key], id: key });
+          if(categoryId) {
+            if(categoryId === response[key].categoryId) {
+              movies.push({...response[key], id: key});
             }
           } else {
-            movies.push({ ...response[key], id: key });
+            movies.push({...response[key], id: key});
           }
         }
 
