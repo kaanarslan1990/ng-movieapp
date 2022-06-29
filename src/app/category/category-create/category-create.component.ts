@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Category } from '../models/category';
+import { Category } from '../category';
 
-import { CategoryService } from '../services/category.service';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-category-create',

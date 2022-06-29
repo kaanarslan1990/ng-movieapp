@@ -1,17 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { CategoryComponent } from './category/category.component';
-
 import { FooterComponent } from './footer/footer.component';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertifyService } from './services/alertify.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { CategoryCreateComponent } from './category-create/category-create.component';
 import { AuthComponent } from './auth/auth.component';
 import { ErrorInterceptor } from './services/error.interceptor';
 import { AuthInterceptor } from './services/auth.interceptor';
@@ -23,9 +18,9 @@ import { MoviesModule } from './movies/movies.module';
     //component import
     AppComponent,
     NavbarComponent,
-    CategoryComponent,   
+    
     FooterComponent,    
-    CategoryCreateComponent,
+    
     AuthComponent,    
     AlertComponent,
     LoadingComponent,

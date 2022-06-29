@@ -1,9 +1,9 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Category } from 'src/app/models/category';
+import { Category } from 'src/app/category/category';
 import { AlertifyService } from '../../services/alertify.service';
-import { CategoryService } from '../../services/category.service';
+import { CategoryService } from '../../category/category.service';
 import { MovieService } from '../../services/movie.service';
 import { ImageValidator } from '../../validators/image.validator';
 
