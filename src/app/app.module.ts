@@ -1,20 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
+import { AppComponent } from './app.component'; 
 import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
-
-import { AlertifyService } from './services/alertify.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { ErrorInterceptor } from './services/error.interceptor';
-import { AuthInterceptor } from './auth/auth.interceptor';
-import { AlertComponent } from './shared/alert/alert.component';
-import { LoadingComponent } from './shared/loading/loading.component';
-import { MoviesModule } from './movies/movies.module';
-import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
+import { MoviesModule } from './movies/movies.module';
+import { FooterComponent } from './footer/footer.component';
+import { CoreModule } from './core.module';
 
 
 @NgModule({
@@ -32,13 +27,9 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     MoviesModule,
     AuthModule,
-    SharedModule
+    SharedModule,
+    CoreModule
   ],
-  providers: [
-    AlertifyService,
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-  ], // services,
 
   bootstrap: [AppComponent], // starter component
 })
