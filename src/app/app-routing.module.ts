@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { CategoryCreateComponent } from './category-create/category-create.component';
 import { AuthGuard } from './guards/auth.guards';
-import { MovieCreateComponent } from './movie-create/movie-create.component';
-import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { MovieCreateComponent } from './movies/movie-create/movie-create.component';
+import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 import { MoviesHomeComponent } from './movies/movies-home/movies-home.component';
 import { MoviesComponent } from './movies/movies.component';
 

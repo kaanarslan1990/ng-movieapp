@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from '../models/category';
+
 import { CategoryService } from '../services/category.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class CategoryCreateComponent implements OnInit {
     private router: Router
   ) {}
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {
     
   }
