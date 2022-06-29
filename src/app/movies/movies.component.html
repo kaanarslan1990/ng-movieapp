@@ -65,11 +65,22 @@
           <!-- <p class="card-text">{{ item.datePublished | date: 'dd/MM/y' }}</p> -->
           <div>
             <a routerLink="/movies/{{ item.id }}" class="btn btn-sm btn-outline-primary">Details</a>
-            <button
+
+
+
+
+            <button *ngIf="!getButtonstate(item)"
               (click)="addToList($event, item)"
               class="btn btn-sm btn-primary ms-1"
             >
               Add to List
+            </button>
+
+            <button *ngIf="getButtonstate(item)"
+              (click)="addToList($event, item)"
+              class="btn btn-sm btn-danger ms-1"
+            >
+              Remove from List
             </button>
           </div>
         </div>

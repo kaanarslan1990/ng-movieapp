@@ -16,6 +16,7 @@ export class MoviesComponent implements OnInit {
   movies: Movie[] = [];
   FilteredMovies: Movie[] = [];
   userId: string;
+  movieList: string[] =[];
 
   filterText: string = '';
   error: any;
@@ -32,22 +33,35 @@ export class MoviesComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user.subscribe((user) => {
       this.userId = user.id;
-    });
-    this.activatedRoute.params.subscribe((params) => {
-      this.loading = true;
 
-      this.movieService.getMovies(params['categoryId']).subscribe(
-        (data) => {
-          this.movies = data;
-          this.FilteredMovies = this.movies;
-          this.loading = false;
-        },
-        (error) => {
-          this.error = error;
-          this.loading = false;
-        }
-      );
+      this.activatedRoute.params.subscribe((params) => {
+        this.loading = true;
+  
+        this.movieService.getMovies(params['categoryId']).subscribe(
+          (data) => {
+            this.movies = data;
+            this.FilteredMovies = this.movies;
+
+            this.movieService.getList(this.userId).subscribe(data => {
+              this.movieList = data;
+            })
+            this.loading = false;
+          },
+          (error) => {
+            this.error = error;
+            this.loading = false;
+          }
+        );
+      });
+
+
+
+
+
+
+
     });
+   
   }
 
   // ngOnInit(): void {
@@ -75,6 +89,12 @@ export class MoviesComponent implements OnInit {
         )
       : this.movies;
   }
+
+  getButtonstate(movie: Movie) {
+    return this.movieList.findIndex(m => m=== movie.id) > -1
+
+  }
+
   addToList($event: any, movie: Movie) {
     if ($event.target.classList.contains('btn-primary')) {
       $event.target.innerText = 'Remove from List';
