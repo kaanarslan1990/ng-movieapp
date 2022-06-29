@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { AuthGuard } from "../auth/auth.guards";
+import { SharedModule } from "../shared/shared.module";
 import { CategoryCreateComponent } from "./category-create/category-create.component";
 import { CategoryComponent } from "./category.component";
 
@@ -22,7 +23,8 @@ import { CategoryComponent } from "./category.component";
                 component: CategoryCreateComponent,
                 canActivate: [AuthGuard],
               },
-        ])
+        ]),
+        SharedModule
 
     ],
     exports: [

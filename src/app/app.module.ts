@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AlertifyService } from './services/alertify.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,18 +14,16 @@ import { LoadingComponent } from './shared/loading/loading.component';
 import { MoviesModule } from './movies/movies.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
     //component import
     AppComponent,
-    NavbarComponent,
+    NavbarComponent,    
+    FooterComponent,
     
-    FooterComponent,    
-    
-       
-    AlertComponent,
-    LoadingComponent,
   ],
   imports: [
     // module import
@@ -34,6 +32,7 @@ import { AuthModule } from './auth/auth.module';
     AppRoutingModule,
     MoviesModule,
     AuthModule,
+    SharedModule
   ],
   providers: [
     AlertifyService,
