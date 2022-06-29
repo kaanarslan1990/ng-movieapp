@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AlertifyService } from '../services/alertify.service';
-import { AuthService } from '../services/auth.service';
-import { MovieService } from '../services/movie.service';
-import { Movie } from './movie';
+
+import { MovieService } from './movie.service';
+import { Movie } from './movie.model';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-movies',
@@ -17,7 +18,7 @@ export class MoviesComponent implements OnInit {
   movies: Movie[] = [];
   FilteredMovies: Movie[] = [];
   userId: string;
-  movieList: string[] =[];
+  movieList: string[] = [];
 
   filterText: string = '';
   error: any;
@@ -33,36 +34,30 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user.subscribe((user) => {
-      this.userId = user.id;
+      if (user) {
+        this.userId = user.id;
 
-      this.activatedRoute.params.subscribe((params) => {
-        this.loading = true;
-  
-        this.movieService.getMovies(params['categoryId']).subscribe(
-          (data) => {
-            this.movies = data;
-            this.FilteredMovies = this.movies;
+        this.activatedRoute.params.subscribe((params) => {
+          this.loading = true;
 
-            this.movieService.getList(this.userId).subscribe(data => {
-              this.movieList = data;
-            })
-            this.loading = false;
-          },
-          (error) => {
-            this.error = error;
-            this.loading = false;
-          }
-        );
-      });
+          this.movieService.getMovies(params['categoryId']).subscribe(
+            (data) => {
+              this.movies = data;
+              this.FilteredMovies = this.movies;
 
-
-
-
-
-
-
+              this.movieService.getList(this.userId).subscribe((data) => {
+                this.movieList = data;
+              });
+              this.loading = false;
+            },
+            (error) => {
+              this.error = error;
+              this.loading = false;
+            }
+          );
+        });
+      }
     });
-   
   }
 
   // ngOnInit(): void {
@@ -92,8 +87,7 @@ export class MoviesComponent implements OnInit {
   }
 
   getButtonstate(movie: Movie) {
-    return this.movieList.findIndex(m => m=== movie.id) > -1
-
+    return this.movieList.findIndex((m) => m === movie.id) > -1;
   }
 
   addToList($event: any, movie: Movie) {
@@ -115,12 +109,14 @@ export class MoviesComponent implements OnInit {
       $event.target.classList.remove('btn-danger');
       $event.target.classList.add('btn-primary');
 
-      this.movieService.removeFromList({
-        userId: this.userId,
-        movieId: movie.id,
-      }).subscribe(() => this.alertify.error(movie.title + ' Removed from list'))
-
-      
+      this.movieService
+        .removeFromList({
+          userId: this.userId,
+          movieId: movie.id,
+        })
+        .subscribe(() =>
+          this.alertify.error(movie.title + ' Removed from list')
+        );
     }
   }
 }
