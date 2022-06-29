@@ -6,17 +6,31 @@ import { CategoryCreateComponent } from './category-create/category-create.compo
 import { AuthGuard } from './guards/auth.guards';
 import { MovieCreateComponent } from './movie-create/movie-create.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { MoviesHomeComponent } from './movies/movies-home/movies-home.component';
 import { MoviesComponent } from './movies/movies.component';
 
 const routes: Routes = [
-  { path: 'movies', component: MoviesComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'movies', pathMatch: 'full' },
-  { path: 'movies/category/:categoryId', component: MoviesComponent, canActivate: [AuthGuard] },
-  { path: 'movies/create', component: MovieCreateComponent, canActivate: [AuthGuard]},
+  {
+    path: 'movies',
+    component: MoviesHomeComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: MoviesComponent },
+      { path: 'category/:categoryId', component: MoviesComponent },
+      { path: 'create', component: MovieCreateComponent},
+      { path: ':movieId', component: MovieDetailsComponent},
+
+    ]},
+  
+
+
   { path: 'categories/create', component: CategoryCreateComponent, canActivate: [AuthGuard]},
-  { path: 'movies/:movieId', component: MovieDetailsComponent, canActivate: [AuthGuard]},
   { path: 'auth', component: AuthComponent},
 ];
+
+//movies 
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
