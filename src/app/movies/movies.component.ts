@@ -26,13 +26,13 @@ export class MoviesComponent implements OnInit {
     private alertify: AlertifyService,
     private movieService: MovieService,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.authService.user.subscribe(user => {
-      this.userId = user.id
-    })
+    this.authService.user.subscribe((user) => {
+      this.userId = user.id;
+    });
     this.activatedRoute.params.subscribe((params) => {
       this.loading = true;
 
@@ -94,7 +94,12 @@ export class MoviesComponent implements OnInit {
       $event.target.classList.remove('btn-danger');
       $event.target.classList.add('btn-primary');
 
-      this.alertify.error(movie.title + ' Removed from list');
+      this.movieService.removeFromList({
+        userId: this.userId,
+        movieId: movie.id,
+      }).subscribe(() => this.alertify.error(movie.title + ' Removed from list'))
+
+      
     }
   }
 }
