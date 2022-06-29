@@ -1,8 +1,19 @@
-<div class="alert alert-danger" *ngIf="error">
-  {{error}}
-  <!-- 404 Not Found! -->
-</div>
+<div class="container my-3">
+  <div class="row">
+      <div class="col-md-3">
+          <app-category></app-category>
+      </div>
+      <div class="col-md-9">
+        <div *ngIf="loading" class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        
+        <div class="alert alert-danger" *ngIf="error">
+          {{error}}
+          <!-- 404 Not Found! -->
+        </div>
 
+        
 <div *ngIf="!loading">
   <div *ngIf="movies.length > 0; else no_movies">
   <h1 class="bg-success">{{ title }}</h1>
@@ -29,6 +40,13 @@
   ></ng-template> -->
 </div>
 </div>
+
+      </div>
+  </div>
+</div>
+
+
+
 <ng-template class="alert alert-warning" #no_movies>
   <div class="alert alert-warning">
   Film Not Found
@@ -66,9 +84,7 @@
   </div>
 </ng-template>
 
-<div *ngIf="loading" class="spinner-border text-primary" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
+
 
 <!-- <ng-template #movieList2 let-films="movies">
   <h3 class="bg-success">Popular Movies</h3>
