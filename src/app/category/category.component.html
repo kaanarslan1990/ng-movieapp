@@ -9,7 +9,7 @@
   </a>
 
   <a
-    routerLink="movies/category/{{ item.id}}"
+    routerLink="/movies/category/{{ item.id}}"
     *ngFor="let item of categories"
     [class.active]="!displayAll && selectedCategory.id === item.id"
     
