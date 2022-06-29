@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
+import { catchError, Subject, tap, throwError } from 'rxjs';
 import { AuthResponse } from '../models/AuthResponse';
+import { User } from '../models/user';
 
 
 
@@ -12,6 +13,8 @@ export class AuthService {
 
   api_key ="AIzaSyBqjn1TUeOvNQ5ugGNrV_IX64QEMfWepps"
 
+  user = new Subject<User>();
+
   constructor(private http: HttpClient) { }
 
 
@@ -20,7 +23,20 @@ export class AuthService {
       email: email,
       password: password,
       returnSecureToken: true
-    })
+    }).pipe(
+      tap(response => {
+        const expirationDate =new Date(new Date().getTime() + (+response.expiresIn *1000))
+
+        const user = new User(
+          response.email,
+          response.localId,
+          response.idToken,
+          expirationDate
+        );
+
+        this.user.next(user);
+      })
+    )
   }
 
   login(email: string, password: string) {
