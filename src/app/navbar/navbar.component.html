@@ -1,6 +1,10 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-    <div class="container">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <div class="container-fluid">
         <a href="/" class="navbar-brand">Khan's MovieApp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto">
             <li *ngIf="isAuthenticated" class="nav-item">
                 <a href="" class="nav-link active">Home</a>
@@ -25,5 +29,6 @@
             </li>
             
         </ul>
+    </div>
     </div>
 </nav>
