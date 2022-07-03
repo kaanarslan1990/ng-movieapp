@@ -25,9 +25,10 @@ export class CategoryComponent implements OnInit {
   displayAll = true;
 
   selectCategory(item?: Category) {
+    
     if (item) {
       this.selectedCategory = item;
-      this.displayAll = false;
+      this.displayAll = false;    
     } else {
       this.selectedCategory = null;
       this.displayAll = true;

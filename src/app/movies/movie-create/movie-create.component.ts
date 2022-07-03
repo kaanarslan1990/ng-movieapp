@@ -68,7 +68,7 @@ export class MovieCreateComponent implements OnInit {
         imageUrl: this.movieForm.value.imageUrl,
         isPopular: false,
         datePublished: new Date().getTime(),
-        categoryId: Number(this.movieForm.value.categoryId),
+        categoryId: this.movieForm.value.categoryId,
       };
       this.movieService.createMovie(movie).subscribe((data) => {
        this.router.navigate(['/movies']);

@@ -5,6 +5,7 @@ import { RouterModule } from "@angular/router";
 import { AuthGuard } from "../auth/auth.guards";
 import { SharedModule } from "../shared/shared.module";
 import { CategoryCreateComponent } from "./category-create/category-create.component";
+import { CategoryRoutingModule } from "./category-routing.module";
 import { CategoryComponent } from "./category.component";
 
 
@@ -15,19 +16,15 @@ import { CategoryComponent } from "./category.component";
 
     ],
     imports: [
+        RouterModule,
         CommonModule,
         FormsModule,
-        RouterModule.forChild([
-            {
-                path: 'categories/create',
-                component: CategoryCreateComponent,
-                canActivate: [AuthGuard],
-              },
-        ]),
+        CategoryRoutingModule,
         SharedModule
 
     ],
     exports: [
+        
         CategoryComponent,   
         CategoryCreateComponent,
     ]

@@ -39,22 +39,18 @@ export class MoviesComponent implements OnInit {
 
         this.activatedRoute.params.subscribe((params) => {
           this.loading = true;
-
-          this.movieService.getMovies(params['categoryId']).subscribe(
-            (data) => {
-              this.movies = data;
-              this.FilteredMovies = this.movies;
-
-              this.movieService.getList(this.userId).subscribe((data) => {
-                this.movieList = data;
-              });
-              this.loading = false;
-            },
-            (error) => {
-              this.error = error;
-              this.loading = false;
-            }
-          );
+          this.movieService.getMovies(params['categoryId']).subscribe({
+            next: (data) => {
+             
+                this.movies = data;
+                this.FilteredMovies = this.movies;
+  
+                this.movieService.getList(this.userId).subscribe((data) => {
+                  this.movieList = data;
+                });
+                this.loading = false;
+              }
+            });
         });
       }
     });

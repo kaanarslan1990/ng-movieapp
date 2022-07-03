@@ -17,7 +17,7 @@ export class MovieService {
 
   constructor(private http: HttpClient) {}
 
-  getMovies(categoryId: number): Observable<Movie[]> {
+  getMovies(categoryId: string): Observable<Movie[]> {
 
     let newUrl =this.url_firebase + "movies.json";
 
